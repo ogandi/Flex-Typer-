@@ -1,52 +1,48 @@
-import { useState, useEffect } from "react";
-import Stopwatch from "../Stopwatch/Stopwatch";
+import { useState, useEffect } from "react"
+import Stopwatch from "../Stopwatch/Stopwatch"
+import * as Game from "../../Utils/findTotalCharacterCount"
 
-// const [gameStatus, setGameStatus] = useState(false)
 
-export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, isGameRunning }) {
+
+export default function GameBox({ setIsGameRunning, isGameRunning }) {
+
     const [userOutput, setUserOutput] = useState("")
     const [totalParagraphs, setTotalParagraphs] = useState(2)
     const [paragraphs, setParagraphs] = useState(["   ", "test", "testt"])
     const [paragraphIndex, setParagraphIndex] = useState(0)
+    const [totalCharacterCount, setTotalCharacterCount] = useState(0)
+    const [text, setText] = useState({ correctText: "", remainingText: "" })
+
     const [errors, setErrors] = useState([])
     const [errorCount, setErrorCount] = useState(0)
-    const [text, setText] = useState({ correctText: "", remainingText: "" })
-    const [totalCharacterCount, setTotalCharacterCount] = useState(0)
+
     const [timeElapsed, setTimeElapsed] = useState(60);
     const [wpm, setWPM] = useState(0)
 
     const originalParagraphs = ["   ", "test", "enter into the paragraph two"]
 
     function findTotalCharacterCount() {
-        let totalCharacterCount = 0
-        for (let i = 1; i < paragraphs.length; i++) {
-            totalCharacterCount += paragraphs[i].length
-        }
-        setTotalCharacterCount(totalCharacterCount)
+        setTotalCharacterCount(Game.findTotalCharacters(paragraphs))
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         findTotalCharacterCount()
-    },[])
+    }, [])
 
-    function paragraphHolder() {
-        const currentParagraph = paragraphs[paragraphIndex];
-        const firstErrorIndex = errors.length > 0 ? errors[0] : userOutput.length;
-        const correctText = currentParagraph.slice(0, firstErrorIndex);
-        const remainingText = currentParagraph.slice(firstErrorIndex);
-        setText({ correctText, remainingText });
+    function createParagraphs() {
+        setText(Game.filterParagraphs(paragraphs, paragraphIndex, errors, userOutput));
     }
 
 
     useEffect(() => {
-        paragraphHolder();
+        createParagraphs();
     }, [userOutput]);
 
 
 
 
 
-    function startGame(e) {
+    function handleInput(e) {
         let userInput = e.target.value
         setUserOutput(userInput)
         setErrors(checkError(userInput))
@@ -112,7 +108,7 @@ export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, i
     }
 
 
- 
+
 
 
 
@@ -125,10 +121,10 @@ export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, i
                 isGameRunning={isGameRunning}
                 totalCharacterCount={totalCharacterCount}
                 timeElapsed={timeElapsed}
-                setTimeElapsed={setTimeElapsed} 
+                setTimeElapsed={setTimeElapsed}
                 wpm={wpm}
                 setWPM={setWPM}
-                />
+            />
 
 
             <section className="game-box">
@@ -142,7 +138,9 @@ export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, i
                                 >
                                     {index === paragraphIndex ? (
                                         <>
-                                            <span className="correct">{text.correctText}</span>
+                                            <span className="correct">
+                                                {text.correctText}
+                                            </span>
                                             <span className={`remaining ${errors.length > 0 ? "wrong" : ""}`}>
                                                 {text.remainingText}
                                             </span>
@@ -154,15 +152,15 @@ export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, i
                             ))}
                         </div>
 
-                        <input value={userOutput} onInput={startGame} />
+                        <input value={userOutput} onInput={handleInput} />
                     </div>
                     :
                     <div>
                         <h2>You Win!</h2>
-                        <p>Time left: WPM: {wpm} Errors:</p>
+                        <p>Time left:  WPM: {wpm} Errors: {errorCount}</p>
                         <button onClick={resetGame}>play again</button>
                     </div>
-                    }
+                }
 
 
 

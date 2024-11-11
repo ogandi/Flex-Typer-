@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function Stopwatch({wpm, setWPM, timeElapsed, setTimeElapsed, isGameRunning, totalCharacterCount}) {
+export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isGameRunning, totalCharacterCount}) {
     // const [timeElapsed, setTimeElapsed] = useState(60);
     // const [wpm, setWPM] = useState(0)
     let initialTime = 60
