@@ -10,7 +10,7 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
     const [totalParagraphs, setTotalParagraphs] = useState(2)
     const [paragraphs, setParagraphs] = useState(["   ", "test", "testt"])
     const [paragraphIndex, setParagraphIndex] = useState(0)
-    const [totalCharacterCount, setTotalCharacterCount] = useState(0)
+    const [characterCount, setCharacterCount] = useState(0)
     const [text, setText] = useState({ correctText: "", remainingText: "" })
 
     const [errors, setErrors] = useState([])
@@ -21,18 +21,20 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
 
     const originalParagraphs = ["   ", "test", "enter into the paragraph two"]
 
-    function findTotalCharacterCount() {
-        setTotalCharacterCount(Game.findTotalCharacters(paragraphs))
+
+
+
+    function setTotalCharacters() {
+        setCharacterCount(Game.setTotalCharacters(paragraphs))
     }
-
-    useEffect(() => {
-        findTotalCharacterCount()
-    }, [])
-
+    
     function createParagraphs() {
         setText(Game.filterParagraphs(paragraphs, paragraphIndex, errors, userOutput));
     }
-
+    
+    useEffect(() => {
+        setTotalCharacters()
+    }, [])
 
     useEffect(() => {
         createParagraphs();
@@ -107,11 +109,17 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
         setParagraphs(originalParagraphs)
     }
 
+    
 
 
 
-
-
+    // function handleinput(e) {
+    //     console.log(e.key)
+    //     let userInput = e.key
+    //     setUserOutput(prevOutput => prevOutput + userInput); // Append the new key to the existing output
+    //     setErrors(checkError(userOutput + userInput));
+    //     checkProgress(userOutput + userInput)
+    // }
 
 
     return (
@@ -119,7 +127,7 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
 
             <Stopwatch
                 isGameRunning={isGameRunning}
-                totalCharacterCount={totalCharacterCount}
+                characterCount={characterCount}
                 timeElapsed={timeElapsed}
                 setTimeElapsed={setTimeElapsed}
                 wpm={wpm}

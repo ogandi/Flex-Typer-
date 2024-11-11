@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react"
 
-export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isGameRunning, totalCharacterCount}) {
-    // const [timeElapsed, setTimeElapsed] = useState(60);
-    // const [wpm, setWPM] = useState(0)
+export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isGameRunning, characterCount}) {
     let initialTime = 60
-    
-    // console.log(totalCharacterCount);
 
-    
     useEffect(() => {
         let countdown
 
@@ -25,9 +20,9 @@ export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isGameRu
         } else {  
             let finishTime = initialTime - timeElapsed 
             console.log(finishTime);
-            console.log((totalCharacterCount/finishTime) * 60)
+            console.log((characterCount/finishTime) * 60)
             // let wpmTest = (totalCharacterCount/finishTime) * 60
-            setWPM((totalCharacterCount/finishTime) * 60)
+            setWPM((characterCount/finishTime) * 60)
             
             console.log(`you finished with ${timeElapsed} left`);
             clearInterval(countdown)

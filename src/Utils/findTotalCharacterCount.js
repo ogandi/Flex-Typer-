@@ -1,5 +1,5 @@
 
-export function findTotalCharacters(paragraphs) {
+export function setTotalCharacters(paragraphs) {
     let totalCharacterCount = 0
     for (let i = 1; i < paragraphs.length; i++) {
         totalCharacterCount += paragraphs[i].length
@@ -14,4 +14,5 @@ export function filterParagraphs(paragraphs, paragraphIndex, errors, userOutput)
         const remainingText = currentParagraph.slice(firstErrorIndex)
         return {correctText, remainingText}
 }
+
 
