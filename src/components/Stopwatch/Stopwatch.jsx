@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 
-export default function Stopwatch({setIsGameRunning, isGameRunning, totalCharacterCount}) {
-    const [timeElapsed, setTimeElapsed] = useState(60);
-    const [wpm, setWPM] = useState(0)
+export default function Stopwatch({wpm, setWPM, timeElapsed, setTimeElapsed, isGameRunning, totalCharacterCount}) {
+    // const [timeElapsed, setTimeElapsed] = useState(60);
+    // const [wpm, setWPM] = useState(0)
     let initialTime = 60
     
-    console.log(totalCharacterCount);
+    // console.log(totalCharacterCount);
 
     
     useEffect(() => {
@@ -17,7 +17,6 @@ export default function Stopwatch({setIsGameRunning, isGameRunning, totalCharact
                     if (prevTime > 1) return prevTime - 1
                     else {
                         console.log("gameover")
-                        setIsGameRunning(false)
                         clearInterval(countdown)
                         return 0
                     }
@@ -31,7 +30,6 @@ export default function Stopwatch({setIsGameRunning, isGameRunning, totalCharact
             setWPM((totalCharacterCount/finishTime) * 60)
             
             console.log(`you finished with ${timeElapsed} left`);
-            setIsGameRunning(false)
             clearInterval(countdown)
             setTimeElapsed(60)
         }
@@ -42,8 +40,6 @@ export default function Stopwatch({setIsGameRunning, isGameRunning, totalCharact
     return (
         <>
         <span>{timeElapsed}  </span> 
-        <br />
-        <span>{wpm}</span>
         </>
     )
 

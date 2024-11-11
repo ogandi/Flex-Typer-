@@ -9,8 +9,12 @@ export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, i
     const [paragraphs, setParagraphs] = useState(["   ", "test", "testt"])
     const [paragraphIndex, setParagraphIndex] = useState(0)
     const [errors, setErrors] = useState([])
+    const [errorCount, setErrorCount] = useState(0)
     const [text, setText] = useState({ correctText: "", remainingText: "" })
     const [totalCharacterCount, setTotalCharacterCount] = useState(0)
+    const [timeElapsed, setTimeElapsed] = useState(60);
+    const [wpm, setWPM] = useState(0)
+
     const originalParagraphs = ["   ", "test", "enter into the paragraph two"]
 
     function findTotalCharacterCount() {
@@ -44,7 +48,6 @@ export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, i
 
     function startGame(e) {
         let userInput = e.target.value
-        // !isGameRunning ? setIsGameRunning(true) : null
         setUserOutput(userInput)
         setErrors(checkError(userInput))
         checkProgress(userInput)
@@ -59,6 +62,7 @@ export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, i
         for (let i = 0; i < userInput.length; i++) {
             if (userInput[i] !== currentParagraph[i]) {
                 errors.push(i);
+                setErrorCount(errorCount + 1)
             }
         }
         return errors;
@@ -84,25 +88,28 @@ export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, i
             if (totalParagraphs - 1 === 0) {
                 setIsGameRunning(false)
             } else {
-                let index = paragraphs.indexOf(currentParagraph)
-                let poppedParagraph = paragraphs.filter((p, i) => i !== index)
-                setParagraphs(poppedParagraph)
-                setTotalParagraphs(totalParagraphs - 1)
-                setParagraphIndex(0)
-                setUserOutput("")
-
+                nextParagraph(currentParagraph)
             }
         }
     }
 
-    // function resetGame() {
-    //     console.log('You win!');
-    //     setTotalParagraphs(2)
-    //     setUserOutput("")
-    //     setGameStatus(false)
-    //     setParagraphIndex(0)
-    //     setParagraphs(originalParagraphs)
-    // }
+    function nextParagraph(currentParagraph) {
+        let index = paragraphs.indexOf(currentParagraph)
+        let poppedParagraph = paragraphs.filter((p, i) => i !== index)
+        setParagraphs(poppedParagraph)
+        setTotalParagraphs(totalParagraphs - 1)
+        setParagraphIndex(0)
+        setUserOutput("")
+    }
+
+    function resetGame() {
+        // console.log('You win!');
+        setTotalParagraphs(2)
+        setUserOutput("")
+        setIsGameRunning(true)
+        setParagraphIndex(0)
+        setParagraphs(originalParagraphs)
+    }
 
 
  
@@ -115,11 +122,13 @@ export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, i
         <>
 
             <Stopwatch
-                setIsGameRunning={setIsGameRunning}
                 isGameRunning={isGameRunning}
-                setGameStatus={setGameStatus}
-                paragraphs={paragraphs}
-                totalCharacterCount={totalCharacterCount} />
+                totalCharacterCount={totalCharacterCount}
+                timeElapsed={timeElapsed}
+                setTimeElapsed={setTimeElapsed} 
+                wpm={wpm}
+                setWPM={setWPM}
+                />
 
 
             <section className="game-box">
@@ -150,9 +159,8 @@ export default function GameBox({ gameStatus, setGameStatus, setIsGameRunning, i
                     :
                     <div>
                         <h2>You Win!</h2>
-                        Time left: 
-                        WPM: 
-                        Errors: 
+                        <p>Time left: WPM: {wpm} Errors:</p>
+                        <button onClick={resetGame}>play again</button>
                     </div>
                     }
 
