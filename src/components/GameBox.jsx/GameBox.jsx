@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react"
 import Stopwatch from "../Stopwatch/Stopwatch"
 import * as Game from "../../Utils/findTotalCharacterCount"
-
+import "./GameBox.css"
 
 
 export default function GameBox({ setIsGameRunning, isGameRunning }) {
 
     const [userOutput, setUserOutput] = useState("")
     const [totalParagraphs, setTotalParagraphs] = useState(2)
-    const [paragraphs, setParagraphs] = useState(["   ", "test", "testt"])
+    const [paragraphs, setParagraphs] = useState(["test"])
     const [paragraphIndex, setParagraphIndex] = useState(0)
     const [characterCount, setCharacterCount] = useState(0)
     const [text, setText] = useState({ correctText: "", remainingText: "" })
@@ -55,7 +55,7 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
 
     function checkError(userInput) {
         let errors = [];
-        let currentParagraph = checkParagraph(userInput)
+        let currentParagraph = paragraphs[0]
 
         for (let i = 0; i < userInput.length; i++) {
             if (userInput[i] !== currentParagraph[i]) {
@@ -66,21 +66,21 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
         return errors;
     }
 
-    function checkParagraph(userInput) {
-        if (userInput[0] === " ") {
-            return ""
-        }
-        for (let i = 0; i < paragraphs.length; i++) {
-            if (userInput[0] === paragraphs[i][0]) {
-                setParagraphIndex(i)
-                return paragraphs[i]
-            }
-        }
-    }
+    // function checkParagraph(userInput) {
+    //     if (userInput[0] === " ") {
+    //         return ""
+    //     }
+    //     for (let i = 0; i < paragraphs.length; i++) {
+    //         if (userInput[0] === paragraphs[i][0]) {
+    //             setParagraphIndex(i)
+    //             return paragraphs[i]
+    //         }
+    //     }
+    // }
 
     function checkProgress(userInput) {
-        let currentParagraph = checkParagraph(userInput)
-
+        // let currentParagraph = checkParagraph(userInput)
+        let currentParagraph = paragraphs[0]
 
         if (userInput.length === currentParagraph.length && errors.length === 0) {
             if (totalParagraphs - 1 === 0) {
@@ -91,14 +91,14 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
         }
     }
 
-    function nextParagraph(currentParagraph) {
-        let index = paragraphs.indexOf(currentParagraph)
-        let poppedParagraph = paragraphs.filter((p, i) => i !== index)
-        setParagraphs(poppedParagraph)
-        setTotalParagraphs(totalParagraphs - 1)
-        setParagraphIndex(0)
-        setUserOutput("")
-    }
+    // function nextParagraph(currentParagraph) {
+    //     let index = paragraphs.indexOf(currentParagraph)
+    //     let poppedParagraph = paragraphs.filter((p, i) => i !== index)
+    //     setParagraphs(poppedParagraph)
+    //     setTotalParagraphs(totalParagraphs - 1)
+    //     setParagraphIndex(0)
+    //     setUserOutput("")
+    // }
 
     function resetGame() {
         // console.log('You win!');
@@ -110,16 +110,6 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
     }
 
     
-
-
-
-    // function handleinput(e) {
-    //     console.log(e.key)
-    //     let userInput = e.key
-    //     setUserOutput(prevOutput => prevOutput + userInput); // Append the new key to the existing output
-    //     setErrors(checkError(userOutput + userInput));
-    //     checkProgress(userOutput + userInput)
-    // }
 
 
     return (
@@ -160,7 +150,7 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
                             ))}
                         </div>
 
-                        <input value={userOutput} onInput={handleInput} />
+                        <input tabIndex={0} value={userOutput} onInput={handleInput} />
                     </div>
                     :
                     <div>

@@ -1,0 +1,31 @@
+
+.game-box {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.game-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50%;
+    width: 50%;
+    background: rgb(82,82,82);
+    background: radial-gradient(circle, rgba(82,82,82,0.7049413515406162) 100%, rgba(234,237,241,1) 100%);
+}
+
+.current {
+    color: rgba(245, 245, 245, 0.2);
+}
+
+.correct {
+    color: rgb(236, 161, 47);
+}
+
+input {
+    height: 100px;
+    opacity: 0.5;
+
+}

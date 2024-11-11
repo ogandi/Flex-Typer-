@@ -23,7 +23,7 @@ font-family: 'JetBrains Mono', monospace;
 }
 .landing-page-wrapper header span{
     /* position: ; */
-    animation: fadeInOut 2s infinite;
+    animation: fadeInOut 1s infinite;
 }
 
 @keyframes fadeInOut {
