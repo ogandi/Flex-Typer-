@@ -1,6 +1,12 @@
 import "./GameLandingPage.css"
+import { useState } from "react"
 
 export default function GameLandingPage({handleClickInitialise}) {
+    const [prompt, setPrompt] = useState("")
+
+    function handlePromptInput(e) {
+        setPrompt(e.target.value)
+    }
     
 
     return (
@@ -12,7 +18,8 @@ export default function GameLandingPage({handleClickInitialise}) {
                 <h4>OG Industries <span>_</span></h4>
             </header>
             <div>
-                <button onClick={handleClickInitialise}>Start Game</button>
+                <input onChange={handlePromptInput}type="text" />
+                <button onClick={()=> handleClickInitialise(prompt)}>Start Game</button>
             </div>
             </section>
         </div>

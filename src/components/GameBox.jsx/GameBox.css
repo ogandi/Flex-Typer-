@@ -24,6 +24,10 @@
     color: rgb(236, 161, 47);
 }
 
+.wrong {
+    color: red;
+} 
+
 input {
     height: 100px;
     opacity: 0.5;

@@ -1,17 +1,16 @@
+
 import { useState, useEffect } from "react"
 import Stopwatch from "../Stopwatch/Stopwatch"
-import * as Game from "../../Utils/findTotalCharacterCount"
+import * as Game from "../../Utils.js/findTotalCharacterCount"
 import "./GameBox.css"
 
 
-export default function GameBox({ setIsGameRunning, isGameRunning }) {
-
+export default function GameBox({ setIsGameRunning, isGameRunning, gamePrompt }) {
+    
     const [userOutput, setUserOutput] = useState("")
-    const [totalParagraphs, setTotalParagraphs] = useState(2)
-    const [paragraphs, setParagraphs] = useState(["test"])
-    const [paragraphIndex, setParagraphIndex] = useState(0)
+
     const [characterCount, setCharacterCount] = useState(0)
-    const [text, setText] = useState({ correctText: "", remainingText: "" })
+    // const [text, setText] = useState({ correctText: "", remainingText: "" })
 
     const [errors, setErrors] = useState([])
     const [errorCount, setErrorCount] = useState(0)
@@ -19,26 +18,31 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
     const [timeElapsed, setTimeElapsed] = useState(60);
     const [wpm, setWPM] = useState(0)
 
-    const originalParagraphs = ["   ", "test", "enter into the paragraph two"]
+    // const originalParagraphs = ["test"]
 
 
 
 
-    function setTotalCharacters() {
-        setCharacterCount(Game.setTotalCharacters(paragraphs))
-    }
+    // async function setTotalCharacters() {
+    //         // setParagraphs([gamePrompt])
+    //         // setCharacterCount(gamePrompt.length)
+    //         // setText(Game.filterParagraphs([gamePrompt], errors, userOutput))
+
+    // }
     
-    function createParagraphs() {
-        setText(Game.filterParagraphs(paragraphs, paragraphIndex, errors, userOutput));
-    }
+    // function createParagraphs() {
+    //     // setText(Game.filterParagraphs(paragraphs, errors, userOutput)); // highlight paragraphs
+    // }
     
-    useEffect(() => {
-        setTotalCharacters()
-    }, [])
+    // useEffect(() => {
+    //     setTotalCharacters()
+    // }, [])
 
-    useEffect(() => {
-        createParagraphs();
-    }, [userOutput]);
+
+
+    // useEffect(() => {
+    //     createParagraphs();
+    // }, [userOutput]);
 
 
 
@@ -83,11 +87,9 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
         let currentParagraph = paragraphs[0]
 
         if (userInput.length === currentParagraph.length && errors.length === 0) {
-            if (totalParagraphs - 1 === 0) {
-                setIsGameRunning(false)
-            } else {
-                nextParagraph(currentParagraph)
-            }
+            setIsGameRunning(false)
+            console.log('you win');
+            
         }
     }
 
@@ -102,14 +104,16 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
 
     function resetGame() {
         // console.log('You win!');
-        setTotalParagraphs(2)
+        // setTotalParagraphs(2)
         setUserOutput("")
         setIsGameRunning(true)
-        setParagraphIndex(0)
-        setParagraphs(originalParagraphs)
+        // setParagraphIndex(0)
+        // setParagraphs(originalParagraphs)
     }
 
     
+    const paragraphs = [gamePrompt]
+    const text = Game.filterParagraphs(paragraphs, errors, userOutput)
 
 
     return (
@@ -117,7 +121,7 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
 
             <Stopwatch
                 isGameRunning={isGameRunning}
-                characterCount={characterCount}
+                characterCount={gamePrompt.length}
                 timeElapsed={timeElapsed}
                 setTimeElapsed={setTimeElapsed}
                 wpm={wpm}
@@ -132,20 +136,25 @@ export default function GameBox({ setIsGameRunning, isGameRunning }) {
                             {paragraphs.map((paragraph, index) => (
                                 <p
                                     key={index}
-                                    className={index === paragraphIndex ? "current" : ""}
-                                >
-                                    {index === paragraphIndex ? (
+                                    className={'current'}>
                                         <>
+
+
+                                            {errors.length > 0 ?  
+                                            <span className="wrong">
+                                                {text.correctText}
+                                            </span> 
+                                            :
                                             <span className="correct">
                                                 {text.correctText}
-                                            </span>
-                                            <span className={`remaining ${errors.length > 0 ? "wrong" : ""}`}>
+                                            </span>}
+
+
+                                            <span className={`remaining `}>
                                                 {text.remainingText}
                                             </span>
                                         </>
-                                    ) : (
-                                        paragraph
-                                    )}
+                            
                                 </p>
                             ))}
                         </div>
