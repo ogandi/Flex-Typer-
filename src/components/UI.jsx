@@ -7,15 +7,15 @@ import axios from "axios"
 
 export default function UI() {
     const [gameStatus, setGameStatus] = useState(false)
-    const [isGameRunning, setIsGameRunning] = useState(false)
-    const [gamePrompt, setGamePrompt] = useState("")
+    const [isUserTyping, setIsUserTyping] = useState(false)
+    const [promptedParagraph, setPromptedParagraph] = useState("")
 
     async function handleClickInitialise(prompt) {
         setGameStatus(true)
-        setIsGameRunning(true)
-        console.log(prompt);
-        let res = await axios.get(`/api/generate-paragraph/${prompt}`)
-        setGamePrompt(res.data.story)
+        setIsUserTyping(true)
+
+        const res = await axios.get(`/api/generate-paragraph/${prompt}`)        
+        setPromptedParagraph(res.data.filteredStory)
         
         return res.data
         
@@ -23,13 +23,14 @@ export default function UI() {
 
     return (
         <div>
-            {gameStatus && gamePrompt ? 
+            {gameStatus && promptedParagraph ? 
             <GameBox 
                 gameStatus={gameStatus} 
                 setGameStatus={setGameStatus}
-                isGameRunning={isGameRunning}
-                setIsGameRunning={setIsGameRunning}
-                gamePrompt={gamePrompt}
+                isUserTyping={isUserTyping}
+                setIsUserTyping={setIsUserTyping}
+                promptedParagraph={promptedParagraph}
+                setPromptedParagraph={setPromptedParagraph}
                 /> 
 
             : 

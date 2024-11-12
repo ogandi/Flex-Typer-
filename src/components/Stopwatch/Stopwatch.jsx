@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 
-export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isGameRunning, characterCount}) {
+export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isUserTyping, characterCount}) {
     let initialTime = 60
 
     useEffect(() => {
         let countdown
 
-        if (isGameRunning) {
+        if (isUserTyping) {
             countdown = setInterval(() => {
                 setTimeElapsed((prevTime) => {
                     if (prevTime > 1) return prevTime - 1
@@ -19,18 +19,14 @@ export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isGameRu
             }, 1000)
         } else {  
             let finishTime = initialTime - timeElapsed 
-            console.log(finishTime);
-            console.log((characterCount/finishTime) * 60)
-            // let wpmTest = (totalCharacterCount/finishTime) * 60
-            setWPM((characterCount/finishTime) * 60)
-            
+            setWPM(((characterCount/5) / (finishTime / 60)))
             console.log(`you finished with ${timeElapsed} left`);
             clearInterval(countdown)
             setTimeElapsed(60)
         }
 
         return () => clearInterval(countdown)
-    },  [isGameRunning])
+    },  [isUserTyping])
 
     return (
         <>
@@ -39,3 +35,7 @@ export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isGameRu
     )
 
 }
+
+
+
+
