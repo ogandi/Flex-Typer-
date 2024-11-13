@@ -12,8 +12,9 @@
     flex-direction: column;
     height: 50%;
     width: 50%;
-    background: rgb(82,82,82);
-    background: radial-gradient(circle, rgba(82,82,82,0.7049413515406162) 100%, rgba(234,237,241,1) 100%);
+    background: rgb(70, 65, 65);
+    border-radius: 5px;
+    /* background: radial-gradient(circle, rgba(82,82,82,0.7049413515406162) 100%, rgba(234,237,241,1) 100%); */
 }
 
 .game-wrapper input {
@@ -26,6 +27,7 @@
 .focus-warning {
     position: absolute;
     top: 400px;
+    z-index: 100;
     color: rgb(255, 255, 255)
 }
 
@@ -36,8 +38,9 @@
     flex-direction: column;
     height: 50%;
     width: 50%;
-    background: rgb(82,82,82);
-    background: radial-gradient(circle, rgba(82,82,82,0.7049413515406162) 100%, rgba(234,237,241,1) 100%);
+    background: rgb(70, 65, 65);
+    border-radius: 5px;
+    /* background: radial-gradient(circle, rgba(82,82,82,0.7049413515406162) 100%, rgba(234,237,241,1) 100%); */
     filter: blur(4px);
 }
 
@@ -47,6 +50,63 @@
     width: 950px;
     opacity: 0;
 }
+
+
+
+.focus-face {
+    position: absolute;
+    top: 190px;
+    left: 500px;
+    height: 200px;
+    width: 200px;
+    z-index: -100;
+    animation: moveUp 2s forwards;
+
+}
+
+.unfocus-face {
+    position: absolute;
+    top: 130px;
+    left: 500px;
+    height: 200px;
+    width: 200px;
+    animation: moveDown 2s forwards;
+}
+
+.focus-hands {
+    position: absolute;
+    top: 130px;
+    left: 500px;
+    height: 200px;
+    width: 200px;
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0px);
+    }
+    20% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(-60px);
+    }
+}
+
+@keyframes moveDown {
+    0% {
+      transform: translateY(0); /* Start at the original position */
+    }
+    20% {
+        transform: translateY(40px);
+    }
+    100% {
+      transform: translateY(60px); /* End at 200px below the starting position */
+    }
+  }
+  
+
+
 
 .current {
     color: rgba(245, 245, 245, 0.2);
@@ -59,3 +119,10 @@
 .wrong {
     color: red;
 } 
+
+.wpm {
+    color: white;
+    position: absolute;
+    top: 200px;
+    right: 600px;
+}

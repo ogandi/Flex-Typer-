@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from "react"
 import Stopwatch from "../Stopwatch/Stopwatch"
 import * as Game from "../../Utils.js/findTotalCharacterCount"
+import hands from "../../images/hands.png"
+import face from "../../images/face-trim.png"
 import "./GameBox.css"
 
 
@@ -100,6 +102,10 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
 
 
             <section className="game-box">
+                <span className="wpm">{wpm}</span>
+                <img  className="focus-hands" src={hands} alt="" />
+                <img  className={inFocus ? "focus-face" : "unfocus-face"} src={face} alt="" />
+
                 {!inFocus && <h1 className="focus-warning">Not in focus, Click here</h1>}
                 {isUserTyping ?
                     <div className={ inFocus ? "game-wrapper" : "blurred"}>

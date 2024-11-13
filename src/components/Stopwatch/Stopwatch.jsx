@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import "./Stopwatch.css"
 
 export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isUserTyping, characterCount}) {
     let initialTime = 60
@@ -30,7 +31,7 @@ export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isUserTy
 
     return (
         <>
-        <span>{timeElapsed}  </span> 
+        <span className="timer">{timeElapsed}  </span> 
         </>
     )
 
