@@ -21,6 +21,18 @@ font-family: 'JetBrains Mono', monospace;
 .landing-page-wrapper header {
     font-size: 3em;
 }
+
+.landing-page-wrapper header h1 {
+  font-size: 120px;
+  text-shadow: 5px 5px #558ABB;
+  margin: 0px 0px 30px 0px;
+}
+.landing-page-wrapper header h4 {
+  font-size: 30px;
+
+
+}
+
 .landing-page-wrapper header span{
     /* position: ; */
     animation: fadeInOut 1s infinite;
@@ -52,6 +64,40 @@ font-family: 'JetBrains Mono', monospace;
 }
 
 
+.landing-page-wrapper label {
+  margin: 0px 0px 20px 0px;
+  
+}
+
 /* button {
     
 } */
+
+.landing-page-wrapper input {
+  display: flex;
+  max-width: 230px;
+  align-items: center;
+  gap: 8px;
+  background: #2f3640;
+  border-radius: 5px;
+  position: relative;
+  color: white;
+  margin: 5px;
+  padding: 5px;
+}
+
+.landing-page-wrapper button {
+  background: #879cb8;
+  border-radius: 5px;
+  padding: 5px;
+  border: rgb(89, 217, 237) solid 0.15em;
+  color: rgb(89, 217, 237) solid 0.15em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.landing-page-wrapper button:active {
+  border-color: teal;
+}
+
+

@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Stopwatch from "../Stopwatch/Stopwatch"
 import * as Game from "../../Utils.js/findTotalCharacterCount"
 import "./GameBox.css"
@@ -13,6 +13,8 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
 
     const [timeElapsed, setTimeElapsed] = useState(60);
     const [wpm, setWPM] = useState(0)
+
+    const [inFocus, setInFocus] = useState(true)
 
 
 
@@ -65,6 +67,24 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
     
     const text = Game.filterParagraphs(paragraphs, errors, userTyped)
 
+    function handleBlur() {
+        console.log('out of focus');
+        setInFocus(false)
+        
+    }
+    function handleFocus() {
+        console.log('in focus');
+        setInFocus(true)
+        
+    }
+
+    const gameInput = useRef(null)
+    
+
+    useEffect(() => {
+        gameInput.current.focus()
+    },[])
+
 
     return (
         <>
@@ -80,8 +100,9 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
 
 
             <section className="game-box">
+                {!inFocus && <h1 className="focus-warning">Not in focus, Click here</h1>}
                 {isUserTyping ?
-                    <div className="game-wrapper">
+                    <div className={ inFocus ? "game-wrapper" : "blurred"}>
                         <div className="paragraphs">
                             {paragraphs.map((paragraph, index) => (
                                 <p
@@ -109,7 +130,7 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
                             ))}
                         </div>
 
-                        <input tabIndex={0} value={userTyped} onInput={handleInput} />
+                        <input ref={gameInput} onFocus={handleFocus} onBlur={handleBlur} value={userTyped} onInput={handleInput} />
                     </div>
                     :
                     <div>
@@ -118,9 +139,6 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
                         <button onClick={resetGame}>play again</button>
                     </div>
                 }
-
-
-
 
             </section>
         </>

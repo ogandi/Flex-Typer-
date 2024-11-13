@@ -16,6 +16,38 @@
     background: radial-gradient(circle, rgba(82,82,82,0.7049413515406162) 100%, rgba(234,237,241,1) 100%);
 }
 
+.game-wrapper input {
+    position: absolute;
+    height: 500px;
+    width: 950px;
+    opacity: 0;
+}
+
+.focus-warning {
+    position: absolute;
+    top: 400px;
+    color: rgb(255, 255, 255)
+}
+
+.blurred {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50%;
+    width: 50%;
+    background: rgb(82,82,82);
+    background: radial-gradient(circle, rgba(82,82,82,0.7049413515406162) 100%, rgba(234,237,241,1) 100%);
+    filter: blur(4px);
+}
+
+.blurred input {
+    position: absolute;
+    height: 500px;
+    width: 950px;
+    opacity: 0;
+}
+
 .current {
     color: rgba(245, 245, 245, 0.2);
 }
@@ -27,9 +59,3 @@
 .wrong {
     color: red;
 } 
-
-input {
-    height: 100px;
-    opacity: 0.5;
-
-}

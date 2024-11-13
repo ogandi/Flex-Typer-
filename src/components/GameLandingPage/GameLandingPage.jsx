@@ -17,6 +17,7 @@ export default function GameLandingPage({handleClickInitialise}) {
                 <h1>Flex Typer</h1>
                 <h4>OG Industries <span>_</span></h4>
             </header>
+                <label htmlFor="">Start by giving Gemini Ai a prompt!</label>
             <div>
                 <input onChange={handlePromptInput}type="text" />
                 <button onClick={()=> handleClickInitialise(prompt)}>Start Game</button>
