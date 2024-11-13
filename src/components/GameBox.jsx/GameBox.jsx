@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Stopwatch from "../Stopwatch/Stopwatch"
+import Stats from "../Stats/Stats"
 import * as Game from "../../Utils.js/findTotalCharacterCount"
 import hands from "../../images/hands.png"
 import face from "../../images/face-trim.png"
@@ -14,6 +15,7 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
     const [errorCount, setErrorCount] = useState(0)
 
     const [timeElapsed, setTimeElapsed] = useState(60);
+
     const [wpm, setWPM] = useState(0)
 
     const [inFocus, setInFocus] = useState(true)
@@ -87,6 +89,7 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
         gameInput.current.focus()
     },[])
 
+    let timeLeft = 0 
 
     return (
         <>
@@ -98,6 +101,7 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
                 setTimeElapsed={setTimeElapsed}
                 wpm={wpm}
                 setWPM={setWPM}
+                timeLeft={timeLeft}
             />
 
 
@@ -139,11 +143,8 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
                         <input ref={gameInput} onFocus={handleFocus} onBlur={handleBlur} value={userTyped} onInput={handleInput} />
                     </div>
                     :
-                    <div>
-                        <h2>You Win!</h2>
-                        <p>Time left:  WPM: {wpm} Errors: {errorCount}</p>
-                        <button onClick={resetGame}>play again</button>
-                    </div>
+                    <Stats  timeLeft={timeLeft} wpm={wpm} errorCount={errorCount} resetGame={resetGame} />
+                   
                 }
 
             </section>

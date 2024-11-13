@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: radial-gradient(circle, rgba(82,82,82,1) 0%, rgba(7,16,28,1) 100%);
 }
 .game-wrapper {
     display: flex;
@@ -12,8 +13,9 @@
     flex-direction: column;
     height: 50%;
     width: 50%;
-    background: rgb(70, 65, 65);
+    background: rgb(73, 71, 71);
     border-radius: 5px;
+    z-index: 4;
     /* background: radial-gradient(circle, rgba(82,82,82,0.7049413515406162) 100%, rgba(234,237,241,1) 100%); */
 }
 
@@ -59,7 +61,7 @@
     left: 500px;
     height: 200px;
     width: 200px;
-    z-index: -100;
+    z-index: 1;
     animation: moveUp 2s forwards;
 
 }
