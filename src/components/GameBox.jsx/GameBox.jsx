@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react"
 import Stopwatch from "../Stopwatch/Stopwatch"
 import Stats from "../Stats/Stats"
@@ -6,7 +5,6 @@ import * as Game from "../../Utils.js/findTotalCharacterCount"
 import hands from "../../images/hands.png"
 import face from "../../images/face-trim.png"
 import "./GameBox.css"
-
 
 export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagraph, setGameStatus, setPromptedParagraph }) {
     
@@ -89,7 +87,10 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
         gameInput.current.focus()
     },[])
 
-    let timeLeft = 0 
+    let timeLeft = timeElapsed
+    console.log(paragraphs);
+    
+    let totalCharacters = paragraphs[0].length
 
     return (
         <>
@@ -106,13 +107,24 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
 
 
             <section className="game-box">
-                <span className="wpm">{wpm}</span>
-                <img  className="focus-hands" src={hands} alt="" />
-                <img  className={inFocus ? "focus-face" : "unfocus-face"} src={face} alt="" />
+                <img  
+                    className="focus-hands" 
+                    src={hands}/>
 
-                {!inFocus && <h1 className="focus-warning">Not in focus, Click here</h1>}
+                <img  
+                    className={inFocus ? "focus-face" : "unfocus-face"} 
+                    src={face}/>
+
+                {!inFocus && 
+                        <h1 className="focus-warning">Not in focus, Click here</h1>}
+
                 {isUserTyping ?
-                    <div className={ inFocus ? "game-wrapper" : "blurred"}>
+                    <div 
+                    className={ inFocus ? 
+                        "game-wrapper"
+                        :
+                        "blurred"}>
+                            
                         <div className="paragraphs">
                             {paragraphs.map((paragraph, index) => (
                                 <p
@@ -143,7 +155,7 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
                         <input ref={gameInput} onFocus={handleFocus} onBlur={handleBlur} value={userTyped} onInput={handleInput} />
                     </div>
                     :
-                    <Stats  timeLeft={timeLeft} wpm={wpm} errorCount={errorCount} resetGame={resetGame} />
+                    <Stats totalCharacters={totalCharacters} timeLeft={timeLeft} wpm={wpm} errorCount={errorCount} resetGame={resetGame} />
                    
                 }
 

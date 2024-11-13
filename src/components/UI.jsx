@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import "./ui.css"
 import Stopwatch from "./Stopwatch/Stopwatch"
 import GameBox from "./GameBox.jsx/GameBox"
 import GameLandingPage from "./GameLandingPage/GameLandingPage"
@@ -10,11 +9,11 @@ export default function UI() {
     const [isUserTyping, setIsUserTyping] = useState(false)
     const [promptedParagraph, setPromptedParagraph] = useState("")
 
-    async function handleClickInitialise(prompt) {
+    async function handleClickInitialise(prompt, selectedLength) {
         setGameStatus(true)
         setIsUserTyping(true)
 
-        const res = await axios.get(`/api/generate-paragraph/${prompt}`)        
+        const res = await axios.get(`/api/generate-paragraph/${prompt}/${selectedLength}`)        
         setPromptedParagraph(res.data.filteredStory)
         
         return res.data

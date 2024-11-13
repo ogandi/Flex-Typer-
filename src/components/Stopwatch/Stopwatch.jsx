@@ -4,6 +4,7 @@ import "./Stopwatch.css"
 export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isUserTyping, characterCount, timeLeft}) {
     let initialTime = 60
 
+
     useEffect(() => {
         let countdown
 
@@ -20,19 +21,19 @@ export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isUserTy
             }, 1000)
         } else {  
             let finishTime = initialTime - timeElapsed 
-            setWPM(((characterCount/5) / (finishTime / 60)))
+            const calculatedWPM = Math.round((characterCount / 5) / (finishTime / 60))
+            setWPM(calculatedWPM)
             console.log(`you finished with ${timeElapsed} left`);
-            // timeLeft = 60 - timeElapsed 
             clearInterval(countdown)
-            setTimeElapsed(60)
         }
 
         return () => clearInterval(countdown)
     },  [isUserTyping])
+    
 
     return (
         <>
-        <span className="timer">{timeElapsed}  </span> 
+        <span className="timer">{timeElapsed}</span> 
         </>
     )
 

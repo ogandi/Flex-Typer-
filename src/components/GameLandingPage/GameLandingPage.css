@@ -86,7 +86,7 @@ font-family: 'JetBrains Mono', monospace;
   padding: 5px;
 }
 
-.landing-page-wrapper button {
+.landing-page-wrapper .start-button {
   background: #879cb8;
   border-radius: 5px;
   padding: 5px;
@@ -96,8 +96,15 @@ font-family: 'JetBrains Mono', monospace;
   cursor: pointer;
 }
 
+.landing-page-wrapper form {
+  display: flex;
+  flex-direction: column;
+} 
+
 .landing-page-wrapper button:active {
   border-color: teal;
 }
+
+
 
 
