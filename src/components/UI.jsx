@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import Stopwatch from "./Stopwatch/Stopwatch"
 import GameBox from "./GameBox.jsx/GameBox"
 import GameLandingPage from "./GameLandingPage/GameLandingPage"
-import axios from "axios"
+
+import callGemini from "../utils.js/gemini-api"
 
 export default function UI() {
     const [gameStatus, setGameStatus] = useState(false)
@@ -12,11 +13,10 @@ export default function UI() {
     async function handleClickInitialise(prompt, selectedLength) {
         setGameStatus(true)
         setIsUserTyping(true)
-
-        const res = await axios.get(`/api/generate-paragraph/${prompt}/${selectedLength}`)        
-        setPromptedParagraph(res.data.filteredStory)
         
-        return res.data
+        const returnedPrompt = await callGemini(prompt, selectedLength)        
+        setPromptedParagraph(returnedPrompt)
+    
         
     }
 

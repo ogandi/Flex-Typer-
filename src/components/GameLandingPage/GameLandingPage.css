@@ -81,25 +81,38 @@ font-family: 'JetBrains Mono', monospace;
   background: #2f3640;
   border-radius: 5px;
   position: relative;
-  color: white;
+  color: rgb(2, 134, 155);
   margin: 5px;
   padding: 5px;
+  text-align: center;
 }
 
 .landing-page-wrapper .start-button {
   background: #879cb8;
   border-radius: 5px;
   padding: 5px;
-  border: rgb(89, 217, 237) solid 0.15em;
-  color: rgb(89, 217, 237) solid 0.15em;
+  border: rgb(12, 93, 106) solid 0.15em;
+  color: rgb(0, 53, 61);
   font-weight: 600;
   cursor: pointer;
 }
 
+
 .landing-page-wrapper form {
   display: flex;
   flex-direction: column;
+  
 } 
+
+.landing-page-wrapper select {
+  background: #2f3640;
+  border-radius: 5px;
+  height: 30px;
+  margin: 0px 0px 10px 0px;
+  text-align: center;
+  color: rgb(2, 134, 155);
+  font-weight: 600;
+}
 
 .landing-page-wrapper button:active {
   border-color: teal;

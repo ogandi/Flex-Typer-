@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import Stopwatch from "../Stopwatch/Stopwatch"
 import Stats from "../Stats/Stats"
-import * as Game from "../../Utils.js/findTotalCharacterCount"
+import {highlightParagraphs} from "../../utils.js/highlight-paragraph"
 import hands from "../../images/hands.png"
 import face from "../../images/face-trim.png"
 import "./GameBox.css"
@@ -47,7 +47,7 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
     function checkProgress(userInput) {
         const [currentParagraph] = paragraphs
         
-        if (userInput.length === currentParagraph.length && errors.length === 0) {
+        if (userInput.length === currentParagraph.length && errors.length === 0 || timeElapsed === 0) {
             
             setIsUserTyping(false)
             console.log('you win');
@@ -67,7 +67,7 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
     const paragraphs = [promptedParagraph]
     console.log(paragraphs);
     
-    const text = Game.filterParagraphs(paragraphs, errors, userTyped)
+    const text = highlightParagraphs(paragraphs, errors, userTyped)
 
     function handleBlur() {
         console.log('out of focus');
