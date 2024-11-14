@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import "./Leaderboard.css"
 
 
 export default function Leaderboard() {
@@ -18,7 +19,7 @@ export default function Leaderboard() {
         <div className="scores-wrapper">
             <h3>Club 110 wpm</h3>
             {scores.map((score, i) => (
-                <p>{score.username} | <span>{score.wpm} wpm -</span> <span>{score.totalCharacters} total characters</span></p>
+                <p><span className="user">{score.username}</span> | <span className="stat">{score.wpm}</span> wpm -  <span className="stat">{score.totalCharacters}</span> total characters</p>
             ))}
         </div>
     )

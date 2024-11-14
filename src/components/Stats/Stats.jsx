@@ -4,14 +4,20 @@ import axios from "axios";
 
 export default function Stats({ wpm, errorCount, resetGame, timeLeft, totalCharacters}) {
     const [username, setUsername] = useState("")
+    const [input, setInput] = useState("")
+    const [entrySent, setEntrySent] = useState(false)
+
+    // let validEntry = wpm === 110 
 
     function handleInput(e){
         setUsername(e.target.value)
+        setInput(e.target.value)
     }
 
     async function handleSubmit(e) {
         e.preventDefault()
         let hiScoreEntry =  await axios.post(`/api/entry`, {username, wpm, totalCharacters}) 
+        setEntrySent(true)
         setUsername("")
         
     }
@@ -22,10 +28,11 @@ export default function Stats({ wpm, errorCount, resetGame, timeLeft, totalChara
                 <h2>Thats a Wrap!</h2>
                 <p>Time left: <span>{timeLeft}</span> Total Characters: <span>{totalCharacters}</span> WPM: <span>{wpm}</span> Errors: <span>{errorCount}</span></p>
                 <button onClick={resetGame}>play again</button>
-                <form onSubmit={handleSubmit} action="">
+                {wpm >= 110 && !entrySent? <form onSubmit={handleSubmit} action="">
                 <input onInput={handleInput} type="text"/>
-                <button>log time</button>
-                </form>
+                <button disabled={input.length < 3}>log time</button>
+                </form> : null}
+                
 
             </section>
         </div>

@@ -18,7 +18,7 @@ function App() {
       }
 
   return (
-    <div>
+    <>
     {isGameRunning && promptedParagraph ? 
     <GameBox 
         setIsGameRunning={setIsGameRunning}
@@ -34,7 +34,7 @@ function App() {
        />}
 
 
-  </div>
+  </>
   )
 }
 

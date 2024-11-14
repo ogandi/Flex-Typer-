@@ -104,26 +104,26 @@ export default function GameBox({ setIsGameRunning, isUserTyping, setIsUserTypin
             />
 
 
-            <section className="game-box">
-                <img  
-                    className="focus-hands" 
-                    src={hands}/>
-
-                <img  
-                    className={inFocus ? "focus-face" : "unfocus-face"} 
-                    src={face}/>
-
+            <section className={inFocus && isUserTyping ? "game-box test" : "game-box"}>
                 {!inFocus && 
                         <h1 className="focus-warning">Not in focus, Click here</h1>}
 
                 {isUserTyping ?
                     <div 
                     className={ inFocus ? 
-                        "game-wrapper"
+                        "game-wrapper" 
                         :
                         "blurred"}>
+
+                    <img  
+                    className="focus-hands" 
+                    src={hands}/>
+
+                    <img  
+                    className={inFocus ? "focus-face" : "unfocus-face"} 
+                    src={face}/>
                             
-                        <div className="paragraphs">
+                        <div className={ inFocus ? "paragraphs" :  'paragraphs blur-effect'}>
                             {paragraphs.map((paragraph, index) => (
                                 <p
                                     key={index}
@@ -158,7 +158,7 @@ export default function GameBox({ setIsGameRunning, isUserTyping, setIsUserTypin
                 }
 
             </section>
-        </>
+            </>
     );
 }
 

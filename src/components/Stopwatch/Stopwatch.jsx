@@ -14,7 +14,7 @@ export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isUserTy
                     if (prevTime > 1) return prevTime - 1
                     else {
                         console.log("gameover")
-                        setIsUserTyping(false)
+                        // setIsUserTyping(false)
                         clearInterval(countdown)
                         return 0
                     }
