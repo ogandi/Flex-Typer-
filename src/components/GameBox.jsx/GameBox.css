@@ -16,12 +16,11 @@
     background: rgb(73, 71, 71);
     border-radius: 5px;
     z-index: 4;
-    /* background: radial-gradient(circle, rgba(82,82,82,0.7049413515406162) 100%, rgba(234,237,241,1) 100%); */
 }
 
 .game-wrapper input {
     position: absolute;
-    height: 500px;
+    height: 800px;
     width: 950px;
     opacity: 0;
 }
@@ -81,6 +80,7 @@
     left: 500px;
     height: 200px;
     width: 200px;
+    z-index: 101;
 }
 
 @keyframes moveUp {
@@ -97,13 +97,13 @@
 
 @keyframes moveDown {
     0% {
-      transform: translateY(0); /* Start at the original position */
+      transform: translateY(0);
     }
     20% {
         transform: translateY(40px);
     }
     100% {
-      transform: translateY(60px); /* End at 200px below the starting position */
+      transform: translateY(60px); 
     }
   }
   

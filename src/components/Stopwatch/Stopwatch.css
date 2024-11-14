@@ -3,5 +3,6 @@
     position: absolute;
     right: 500px;
     color: white;
+    z-index: 600;
 }
 

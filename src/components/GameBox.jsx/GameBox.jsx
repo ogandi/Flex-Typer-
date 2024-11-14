@@ -1,27 +1,32 @@
 import { useState, useEffect, useRef } from "react"
 import Stopwatch from "../Stopwatch/Stopwatch"
 import Stats from "../Stats/Stats"
-import {highlightParagraphs} from "../../utils.js/highlight-paragraph"
+import highlightParagraphs from "../../utils.js/highlight-paragraph"
 import hands from "../../images/hands.png"
 import face from "../../images/face-trim.png"
 import "./GameBox.css"
 
-export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagraph, setGameStatus, setPromptedParagraph }) {
-    
+export default function GameBox({ setIsGameRunning, isUserTyping, setIsUserTyping, promptedParagraph, setPromptedParagraph }) {
     const [userTyped, setUserTyped] = useState("")
     const [errors, setErrors] = useState([])
     const [errorCount, setErrorCount] = useState(0)
-
+        
     const [timeElapsed, setTimeElapsed] = useState(60);
 
     const [wpm, setWPM] = useState(0)
 
     const [inFocus, setInFocus] = useState(true)
 
+    const paragraphs = [promptedParagraph]
+    const totalCharacters = paragraphs[0].length
+    let timeLeft = timeElapsed
+    const text = highlightParagraphs(paragraphs, errors, userTyped)
+    
+    
 
 
     function handleInput(e) {
-        let userInput = e.target.value
+        const userInput = e.target.value
         setUserTyped(userInput)
         setErrors(checkError(userInput))
         checkProgress(userInput)
@@ -36,9 +41,9 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
         for (let i = 0; i < userInput.length; i++) {
             if (userInput[i] !== currentParagraph[i]) {
                 errors.push(i);
-                setErrorCount(errorCount + 1)
             }
         }
+        setErrorCount(errors.length)
         return errors;
     }
 
@@ -46,12 +51,10 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
 
     function checkProgress(userInput) {
         const [currentParagraph] = paragraphs
+        const userFinished = userInput.length === currentParagraph.length && errors.length === 0
         
-        if (userInput.length === currentParagraph.length && errors.length === 0 || timeElapsed === 0) {
-            
+        if (userFinished) {
             setIsUserTyping(false)
-            console.log('you win');
-            
         }
     }
 
@@ -59,15 +62,12 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
     function resetGame() {
         setUserTyped("")
         setIsUserTyping(false)
-        setGameStatus(false)
+        setIsGameRunning(false)
         setPromptedParagraph("")
     }
 
     
-    const paragraphs = [promptedParagraph]
-    console.log(paragraphs);
-    
-    const text = highlightParagraphs(paragraphs, errors, userTyped)
+
 
     function handleBlur() {
         console.log('out of focus');
@@ -87,10 +87,7 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
         gameInput.current.focus()
     },[])
 
-    let timeLeft = timeElapsed
-    console.log(paragraphs);
     
-    let totalCharacters = paragraphs[0].length
 
     return (
         <>
@@ -103,6 +100,7 @@ export default function GameBox({ setIsUserTyping, isUserTyping, promptedParagra
                 wpm={wpm}
                 setWPM={setWPM}
                 timeLeft={timeLeft}
+                setIsUserTyping={setIsUserTyping}
             />
 
 

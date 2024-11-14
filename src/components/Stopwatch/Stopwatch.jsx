@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "./Stopwatch.css"
 
-export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isUserTyping, characterCount, timeLeft}) {
+export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isUserTyping, characterCount, setIsUserTyping}) {
     let initialTime = 60
 
 
@@ -14,6 +14,7 @@ export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isUserTy
                     if (prevTime > 1) return prevTime - 1
                     else {
                         console.log("gameover")
+                        setIsUserTyping(false)
                         clearInterval(countdown)
                         return 0
                     }
@@ -25,6 +26,7 @@ export default function Stopwatch({setWPM, timeElapsed, setTimeElapsed, isUserTy
             setWPM(calculatedWPM)
             console.log(`you finished with ${timeElapsed} left`);
             clearInterval(countdown)
+        
         }
 
         return () => clearInterval(countdown)
