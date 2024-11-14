@@ -1,5 +1,6 @@
 .scores-wrapper {
     color: cyan;
+    max-width: 195px;
 }
 .stat {
     color: white;

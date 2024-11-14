@@ -19,8 +19,8 @@ export default function GameBox({ setIsGameRunning, isUserTyping, setIsUserTypin
 
     const paragraphs = [promptedParagraph]
     const totalCharacters = paragraphs[0].length
-    let timeLeft = timeElapsed
     const text = highlightParagraphs(paragraphs, errors, userTyped)
+    let timeLeft = timeElapsed
     
     
 
@@ -101,6 +101,7 @@ export default function GameBox({ setIsGameRunning, isUserTyping, setIsUserTypin
                 setWPM={setWPM}
                 timeLeft={timeLeft}
                 setIsUserTyping={setIsUserTyping}
+                userTyped={userTyped.length}
             />
 
 

@@ -7,8 +7,6 @@ export default function Stats({ wpm, errorCount, resetGame, timeLeft, totalChara
     const [input, setInput] = useState("")
     const [entrySent, setEntrySent] = useState(false)
 
-    // let validEntry = wpm === 110 
-
     function handleInput(e){
         setUsername(e.target.value)
         setInput(e.target.value)

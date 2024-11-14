@@ -19,7 +19,8 @@ export default function Leaderboard() {
         <div className="scores-wrapper">
             <h3>Club 110 wpm</h3>
             {scores.map((score, i) => (
-                <p><span className="user">{score.username}</span> | <span className="stat">{score.wpm}</span> wpm -  <span className="stat">{score.totalCharacters}</span> total characters</p>
+                <p><span className="user">{score.username}
+                <br></br></span> <span className="stat">{score.wpm}</span> wpm <br></br><span className="stat">{score.totalCharacters}</span> total characters</p>
             ))}
         </div>
     )
