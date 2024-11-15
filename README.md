@@ -1,5 +1,5 @@
 ## Flex Typer 🎮
-Welcome to Flex Typer – a full-stack typing game that challenges your WPM skills while integrating Gemini AI for dynamic content generation and tracking your top speeds with a real-time leaderboard! Play Now!
+Welcome to Flex Typer – a full-stack typing game that challenges your WPM skills while integrating Gemini AI for dynamic content generation and tracking your top speeds with a real-time leaderboard! Play Now! https://flex-typer.onrender.com/
 
 ### About the Project
 Inspired by typing games like Ztype, Flex Typer takes a unique approach by combining a typing test with Gemini AI, allowing players to type dynamic text that’s generated based on their inputs. My goal was to not only create a fun and interactive experience but also to level up my skills in React, API integration, and CSS.
