@@ -69,9 +69,6 @@ font-family: 'JetBrains Mono', monospace;
   
 }
 
-/* button {
-    
-} */
 
 .landing-page-wrapper input {
   display: flex;
@@ -97,12 +94,6 @@ font-family: 'JetBrains Mono', monospace;
   cursor: pointer;
 }
 
-
-.landing-page-wrapper form {
-  /* display: flex; */
-  /* flex-direction: column; */
-  
-} 
 
 .landing-page-wrapper select {
   background: #2f3640;

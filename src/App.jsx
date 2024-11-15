@@ -1,5 +1,5 @@
 import './App.css'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import GameBox from './components/GameBox.jsx/GameBox'
 import GameLandingPage from './components/GameLandingPage/GameLandingPage'
 
